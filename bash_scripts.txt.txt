@@ -1,0 +1,11 @@
+# Remove NAs from .assoc.linear file (or any file)
+awk '!/'NA'/' input_file > output_file
+
+# Filter .assoc.linear to only a certain TEST
+awk -F ' ' '{if (($5 == "ADDxSex")) print $0}' input_file > output_file
+
+# Sort .assoc.linear by p-value
+sort -k9 -g input_file | head
+
+# Filter .assoc.linear file to SNPs around a certain BP
+awk -F ' ' '{if (($1 == $CHROMOSOME_NUMBER) && ($3>$BP_MINUS_ONE_MILLION) && ($3<$BP_PLUS_ONE_MILLION)) print $0}' input_file
