@@ -9,3 +9,6 @@ sort -k9 -g input_file | head
 
 # Filter .assoc.linear file to SNPs around a certain BP
 awk -F ' ' '{if (($1 == $CHROMOSOME_NUMBER) && ($3>$BP_MINUS_ONE_MILLION) && ($3<$BP_PLUS_ONE_MILLION)) print $0}' input_file
+
+# Replace a tab-separated file with a comma-separated file
+sed 's/\t/,/g' input_file > output_file
