@@ -1,8 +1,9 @@
 # Remove NAs from .assoc.linear file (or any file)
 awk '!/'NA'/' input_file > output_file
 
-# Filter .assoc.linear to only a certain TEST
-awk -F ' ' '{if (($5 == "ADDxSex")) print $0}' input_file > output_file
+# Filter .assoc.linear to only certain TESTs
+head -n1 input_file > output_file
+awk -F ' ' '{if (($5 == "$TEST")) print $0}' input_file >> output_file
 
 # Sort .assoc.linear by p-value
 sort -k9 -g input_file | head
